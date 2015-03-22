@@ -4,6 +4,6 @@ Sub project in C language in order to improve the existing JDV one
 
 #How to use
 
-*make clean && make && ./executable
+* make clean && make && ./executable
 
 Have fun !
