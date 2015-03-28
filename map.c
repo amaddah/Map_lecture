@@ -69,7 +69,9 @@ ANIMAL_RES* dedoublerMap(void)
     {
         int j;
         Animal animal_courant;
-        ANIMAL_RES* map_reseau = malloc(sizeof(ANIMAL_RES));
+        printf("nb_cases_possedees: %i\n", nb_cases_possedees);
+        ANIMAL_RES* map_reseau = malloc(_TAILLE_TOTALE_*sizeof(ANIMAL_RES));
+        int espece_courante = __VALEUR_NULLE__;
 
 
         if ( map_reseau == NULL )
@@ -88,9 +90,10 @@ ANIMAL_RES* dedoublerMap(void)
                     continue;*/
                 /*else
                         {*/
+                        espece_courante = (map+j)->espece;
                             map_reseau[nb_cases_possedees].position              = j;
-                            map_reseau[nb_cases_possedees].espece                = map[j].espece;
-                            //printf("pos:%d\n",map_reseau[nb_cases_possedees].espece);
+                            map_reseau[nb_cases_possedees].espece                = espece_courante;
+                            //printf("espece:%d\n",map_reseau[nb_cases_possedees].espece);
                             map_reseau[nb_cases_possedees].dernier_repas         = 1;//map[j].dernier_repas;
                             //printf("pos:%d\n",map_reseau[nb_cases_possedees].dernier_repas);
                             map_reseau[nb_cases_possedees].derniere_reproduction = 2;//map[j].derniere_reproduction;

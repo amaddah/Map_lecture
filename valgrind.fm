@@ -1,0 +1,100 @@
+==3748== Memcheck, a memory error detector
+==3748== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==3748== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
+==3748== Command: ./executable
+==3748== 
+==3748== Invalid write of size 4
+==3748==    at 0x400D51: dedoublerMap (map.c:93)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748==  Address 0x53fb110 is 0 bytes after a block of size 0 alloc'd
+==3748==    at 0x4C28C20: malloc (vg_replace_malloc.c:296)
+==3748==    by 0x400CAB: dedoublerMap (map.c:72)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748== 
+==3748== Invalid write of size 4
+==3748==    at 0x400D6C: dedoublerMap (map.c:94)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748==  Address 0x53fb114 is 4 bytes after a block of size 0 alloc'd
+==3748==    at 0x4C28C20: malloc (vg_replace_malloc.c:296)
+==3748==    by 0x400CAB: dedoublerMap (map.c:72)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748== 
+==3748== Invalid write of size 4
+==3748==    at 0x400D85: dedoublerMap (map.c:96)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748==  Address 0x53fb118 is 8 bytes after a block of size 0 alloc'd
+==3748==    at 0x4C28C20: malloc (vg_replace_malloc.c:296)
+==3748==    by 0x400CAB: dedoublerMap (map.c:72)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748== 
+==3748== Invalid write of size 4
+==3748==    at 0x400DA2: dedoublerMap (map.c:98)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748==  Address 0x53fb11c is 12 bytes after a block of size 0 alloc'd
+==3748==    at 0x4C28C20: malloc (vg_replace_malloc.c:296)
+==3748==    by 0x400CAB: dedoublerMap (map.c:72)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748== 
+==3748== Invalid write of size 4
+==3748==    at 0x400DBF: dedoublerMap (map.c:100)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748==  Address 0x53fb120 is 16 bytes after a block of size 0 alloc'd
+==3748==    at 0x4C28C20: malloc (vg_replace_malloc.c:296)
+==3748==    by 0x400CAB: dedoublerMap (map.c:72)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748== 
+==3748== Invalid read of size 4
+==3748==    at 0x400C5F: afficherMapRes (map.c:51)
+==3748==    by 0x400909: main (main.c:12)
+==3748==  Address 0x53fb114 is 4 bytes after a block of size 0 alloc'd
+==3748==    at 0x4C28C20: malloc (vg_replace_malloc.c:296)
+==3748==    by 0x400CAB: dedoublerMap (map.c:72)
+==3748==    by 0x4008E8: main (main.c:10)
+==3748== 
+
+valgrind: m_mallocfree.c:304 (get_bszB_as_is): Assertion 'bszB_lo == bszB_hi' failed.
+valgrind: Heap block lo/hi size mismatch: lo = 64, hi = 8589934591.
+This is probably caused by your program erroneously writing past the
+end of a heap block and corrupting heap metadata.  If you fix any
+invalid writes reported by Memcheck, this assertion failure will
+probably go away.  Please try that before reporting this as a bug.
+
+
+host stacktrace:
+==3748==    at 0x380A48EF: show_sched_status_wrk (m_libcassert.c:319)
+==3748==    by 0x380A49E4: report_and_quit (m_libcassert.c:390)
+==3748==    by 0x380A4B66: vgPlain_assert_fail (m_libcassert.c:455)
+==3748==    by 0x380B170D: get_bszB_as_is (m_mallocfree.c:302)
+==3748==    by 0x380B170D: get_bszB (m_mallocfree.c:312)
+==3748==    by 0x380B170D: get_pszB (m_mallocfree.c:386)
+==3748==    by 0x380B170D: vgPlain_describe_arena_addr (m_mallocfree.c:1532)
+==3748==    by 0x3809DC93: vgPlain_describe_addr (m_addrinfo.c:188)
+==3748==    by 0x3809C73B: vgMemCheck_update_Error_extra (mc_errors.c:1133)
+==3748==    by 0x380A05BA: vgPlain_maybe_record_error (m_errormgr.c:818)
+==3748==    by 0x3809BCB2: vgMemCheck_record_address_error (mc_errors.c:753)
+==3748==    by 0x3807A3E8: mc_LOADVn_slow (mc_main.c:1388)
+==3748==    by 0x803E9ABDA: ???
+==3748==    by 0x802D95EEF: ???
+==3748==    by 0x3807290F: ??? (mc_malloc_wrappers.c:352)
+==3748==    by 0x400C68: afficherMapRes (map.c:51)
+
+sched status:
+  running_tid=1
+
+Thread 1: status = VgTs_Runnable
+==3748==    at 0x400C31: afficherMapRes (map.c:47)
+==3748==    by 0x400909: main (main.c:12)
+
+
+Note: see also the FAQ in the source distribution.
+It contains workarounds to several common problems.
+In particular, if Valgrind aborted or crashed after
+identifying problems in your program, there's a good chance
+that fixing those problems will prevent Valgrind aborting or
+crashing, especially if it happened in m_mallocfree.c.
+
+If that doesn't help, please report this bug to: www.valgrind.org
+
+In the bug report, send all the above text, the valgrind
+version, and what OS and version you are using.  Thanks.
+

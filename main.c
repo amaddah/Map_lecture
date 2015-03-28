@@ -10,11 +10,8 @@ int main(int argc, char *argv[], char **arge)
 	map_res = dedoublerMap();
 	printf("Voici la map après construction à partir de la map de base ... \n");
 	afficherMapRes(map_res);
-	__ATTENTE__
-
-	message = initierMSG(message);
-	//message =  construireMSG(map_res, message);
-	strcat(message,"-1,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3;0,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3$");
+	message = construireMSG(map_res, message);
+	//strcat(message,"-1,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3;0,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3$");
 	printf("Voici la map actuelle sous forme de chaine= %s\n",message);
 	__ATTENTE__
 

@@ -2,28 +2,18 @@
 
 char* initierMSG(char* __msg)
 	{
-		//int i = __VALEUR_NULLE__;
 		__msg = malloc(BUFFERMIN*sizeof(char));
 		if ( __msg == NULL )
 					exit(EXIT_FAILURE);
 
-					//for(i=0;i<BUFFERMIN;i++)
-						//__msg[i] = __CHAR_NUL__;
-
-					//printf("%s\n",__msg); => OK
-
 					__msg[0] = __SEPARATEUR_AVANT_DEBUT_NOUVEAU_CHAMP__;
-					//snprintf(&char_ascii, sizeof(&char_ascii), "%i",nb_cases_possedees);
-					//printf("%i vs %c\n",nb_cases_possedees,char_ascii);
 					__msg[1] = __CHAR_NUL__ + nb_cases_possedees;
 					__msg[2] = __SEPARATEUR_APRES_DEBUT_NOUVEAU_CHAMP__;
-
-					//printf("%s\n",__msg);
 
 			return __msg;
 	}
 
-char* construireMSG(ANIMAL_RES* __map, char* __msg)
+char* construireMSG(ANIMAL_RES* map_res__, char* __msg)
 	{
 		int i = __VALEUR_NULLE__;
 		int __position_read = POSITION_LECTURE;
@@ -36,14 +26,14 @@ char* construireMSG(ANIMAL_RES* __map, char* __msg)
 
 		for(i=0; i<nb_cases_possedees ;i++)
 			{
-				espece_courante									= __map[i].espece;
+				espece_courante									= map_res__[i].espece;
 				printf("espec %i\n",espece_courante);
-				dernier_repas_courant						= __map[i].dernier_repas;
-				printf("repas %i\n",dernier_repas_courant);
-				derniere_reproduction_courante	= __map[i].derniere_reproduction;
-				printf("repro %i\n",derniere_reproduction_courante);
-				satiete_courante								= __map[i].satiete;
-				printf("sat %i\n",satiete_courante);
+				dernier_repas_courant						= map_res__[i].dernier_repas;
+				//printf("repas %i\n",dernier_repas_courant);
+				derniere_reproduction_courante	= map_res__[i].derniere_reproduction;
+				//printf("repro %i\n",derniere_reproduction_courante);
+				satiete_courante								= map_res__[i].satiete;
+				//printf("sat %i\n",satiete_courante);
 
 				if ( espece_courante == t_mur )
 					{
