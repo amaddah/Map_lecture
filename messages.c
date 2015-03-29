@@ -2,7 +2,7 @@
 
 char* initierMSG(char* __msg)
 	{
-		__msg = malloc(BUFFERMIN*sizeof(char));
+		__msg = malloc(BUFFERSIZE*sizeof(char));
 		if ( __msg == NULL )
 					exit(EXIT_FAILURE);
 
@@ -27,7 +27,7 @@ char* construireMSG(ANIMAL_RES* map_res__, char* __msg)
 		for(i=0; i<nb_cases_possedees ;i++)
 			{
 				espece_courante									= map_res__[i].espece;
-				printf("espec %i\n",espece_courante);
+				//printf("espec %i\n",espece_courante);
 				dernier_repas_courant						= map_res__[i].dernier_repas;
 				//printf("repas %i\n",dernier_repas_courant);
 				derniere_reproduction_courante	= map_res__[i].derniere_reproduction;
@@ -62,7 +62,7 @@ char* construireMSG(ANIMAL_RES* map_res__, char* __msg)
 				else
 						__msg[__position_read++] = __CARACTERE_FIN_CHAMP__;
 			}
-		printf("%s\n",__msg);
+		//printf("Msg apres construc %s\n",__msg);
 		return __msg;
 	}
 
@@ -72,15 +72,21 @@ ANIMAL_RES* decomposerMSG(char* __msg)
 		int i, j = __VALEUR_NULLE__;
 		ANIMAL_RES* __map = NULL;
 
-		char *str1, *str2, *token, *subtoken, *saveptr1, *saveptr2;
-		char *premier_message;
+		char
+					*str1 = NULL,
+					*str2 = NULL,
+					*token = NULL,
+					*subtoken = NULL,
+					*saveptr1 = NULL,
+					*saveptr2 = NULL,
+					*sous_donnees = NULL,
+					**donnees_map = NULL,
+					*chaine_temp = NULL;
 
-		char* sous_donnees;
-		char**donnees_map = NULL;
+		//printf("Msg avant for %s\n",__msg);
+		//exit(EXIT_FAILURE);
 
-		char *chaine_temp;
-
-		sous_donnees = malloc(NB_SOUS_CHAMP*sizeof(char*));
+		sous_donnees = malloc(NB_SOUS_CHAMP*sizeof(char));
 		// Ne sert qu'au donnees map qui va nous servir à stocker toutes les sous chaines
 		// contenant les sous champs (=cases avec infos) du tableau
 		if ( sous_donnees == NULL )
@@ -89,16 +95,19 @@ ANIMAL_RES* decomposerMSG(char* __msg)
 				exit(EXIT_FAILURE);
 			}
 
-			chaine_temp = malloc(sizeof(__msg));
+			chaine_temp = malloc(BUFFERSIZE*sizeof(char));
 			if ( chaine_temp == NULL )
 			{
 				perror("donnes map");
 				exit(EXIT_FAILURE);
 			}
-
+			//printf("Msg avant strtok %s\n",__msg);
+			//exit(EXIT_FAILURE);
 			strcpy(chaine_temp,__msg);
 			nb_cases = strtok(chaine_temp,"#:")[0] - '0';
-			printf("Après découpage, nb nb_cases vaut %i\n",nb_cases);
+			if ( nb_cases <= 0 )
+							nb_cases = 100;
+			//printf("Après découpage, nb nb_cases vaut %i\n",nb_cases);
 			__ATTENTE__
 
 			// On a maintenant le nb_cases, on peut malloquer le gros tableau
@@ -113,8 +122,11 @@ ANIMAL_RES* decomposerMSG(char* __msg)
 		// On commence naturellement par découper notre message en plusieurs sous champs
 		// stockées dans les donnes_map + j (j variant de 0 à nb_cases)
 
+		//printf("Msg avant for %s\n",__msg);
+		//exit(EXIT_FAILURE);
+
    for (i = 1, str1 = __msg; ; i++, str1 = NULL) {
-        token = strtok_r(str1, "#:$", &saveptr1);
+        token = strtok_r(str1, "#:", &saveptr1);
         if (token == NULL)
             break;
 
@@ -124,14 +136,14 @@ ANIMAL_RES* decomposerMSG(char* __msg)
             if (subtoken == NULL)
                 break;
 						if ( i == 2 )
-						donnees_map[j] = subtoken;
+							donnees_map[j] = subtoken;
         }
     }
 
-		printf("On affiche les éléments de la map :\n");
-		__ATTENTE__
-		for(i=0;i<nb_cases;i++)
-			printf("Case %i %s\n",i, *(donnees_map+i)), __ATTENTE__;
+		//printf("On affiche les éléments de la map :\n");
+		//__ATTENTE__
+		//for(i=0;i<nb_cases;i++)
+			//printf("Case %i %s\n",i, *(donnees_map+i));
 
 
 		// On découpe le reste pour avoir les bonnees données

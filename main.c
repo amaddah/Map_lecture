@@ -11,9 +11,11 @@ int main(int argc, char *argv[], char **arge)
 	printf("Voici la map après construction à partir de la map de base ... \n");
 	afficherMapRes(map_res);
 	message = construireMSG(map_res, message);
+	//printf("Msg apres construc %s\n", message);
+	//exit(EXIT_FAILURE);
 	//strcat(message,"-1,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3;0,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3$");
-	printf("Voici la map actuelle sous forme de chaine= %s\n",message);
-	__ATTENTE__
+	//printf("Voici la map actuelle sous forme de chaine= %s\n",message);
+	//__ATTENTE__
 
 	map_res = decomposerMSG(message);
 

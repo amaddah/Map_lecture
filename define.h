@@ -65,7 +65,7 @@
 #define __VALEUR_NULLE__ 0
 
 #define POSITION_LECTURE 3
-#define _MAP_SIZE_          3
+#define _MAP_SIZE_          10
 #define _TAILLE_TOTALE_     _MAP_SIZE_*_MAP_SIZE_
 #define NB_SOUS_CHAMP 7
 
