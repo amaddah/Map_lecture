@@ -7,10 +7,23 @@ char* initierMSG(char* __msg)
 					exit(EXIT_FAILURE);
 
 					__msg[0] = __SEPARATEUR_AVANT_DEBUT_NOUVEAU_CHAMP__;
-					__msg[1] = __CHAR_NUL__ + nb_cases_possedees;
-					__msg[2] = __SEPARATEUR_APRES_DEBUT_NOUVEAU_CHAMP__;
-
-			return __msg;
+					if ( nb_cases_possedees < 10 )
+						{
+									__msg[1] = __CHAR_NUL__ + nb_cases_possedees;
+									__msg[2] = __SEPARATEUR_APRES_DEBUT_NOUVEAU_CHAMP__;
+									return __msg;
+						}
+					else
+						{
+									char *txt = NULL;
+									txt = malloc(4*sizeof(char));
+									if ( txt == NULL ) exit(EXIT_FAILURE);
+									sprintf(txt, "%i", nb_cases_possedees);
+									strcat(__msg,txt);
+									__msg[4] = __SEPARATEUR_APRES_DEBUT_NOUVEAU_CHAMP__;
+									printf("%s\n", __msg);
+									return __msg;
+						}
 	}
 
 char* construireMSG(ANIMAL_RES* map_res__, char* __msg)
@@ -62,7 +75,7 @@ char* construireMSG(ANIMAL_RES* map_res__, char* __msg)
 				else
 						__msg[__position_read++] = __CARACTERE_FIN_CHAMP__;
 			}
-		//printf("Msg apres construc %s\n",__msg);
+		printf("Msg apres construc %s\n",__msg);
 		return __msg;
 	}
 
@@ -104,10 +117,8 @@ ANIMAL_RES* decomposerMSG(char* __msg)
 			//printf("Msg avant strtok %s\n",__msg);
 			//exit(EXIT_FAILURE);
 			strcpy(chaine_temp,__msg);
-			nb_cases = strtok(chaine_temp,"#:")[0] - '0';
-			if ( nb_cases <= 0 )
-							nb_cases = 100;
-			//printf("Après découpage, nb nb_cases vaut %i\n",nb_cases);
+			nb_cases = atoi(strtok(chaine_temp,"#:"));
+			printf("Après découpage, nb nb_cases vaut %i\n",nb_cases);
 			__ATTENTE__
 
 			// On a maintenant le nb_cases, on peut malloquer le gros tableau
