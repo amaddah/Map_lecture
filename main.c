@@ -3,26 +3,25 @@
 int main(int argc, char *argv[], char **arge)
 {
 	atexit(fin_programme);
+
 	ANIMAL_RES* map_res = NULL;
 	char* message = NULL;
+
+	viderEcran;
 
 	genererMap();
 	map_res = dedoublerMap();
 	printf("Voici la map après construction à partir de la map de base ... \n");
 	afficherMapRes(map_res);
+	entrerPourContinuer
 	message = construireMSG(map_res, message);
-	//printf("Msg apres construc %s\n", message);
-	//exit(EXIT_FAILURE);
-	//strcat(message,"-1,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3;0,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3;-1,1,2,3$");
-	//printf("Voici la map actuelle sous forme de chaine= %s\n",message);
-	//__ATTENTE__
-
+	printf("Voici le msg à envoyer par le réseau ...\n%s",message);
+	entrerPourContinuer
 	map_res = decomposerMSG(message);
-
-	printf("Voici la map après découpage de la chaine ... (un peu de suspense mdrr)\n");
-	__ATTENTE__
+	printf("\nVoici la map après découpage de la chaine ... (un peu de suspense mdrr)\n");
 	afficherMapRes(map_res);
-
+	free(map_res);
+	free(message);
 	return EXIT_SUCCESS;
 }
 

@@ -39,6 +39,9 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
+#define viderEcran printf("o\e[1;1H\e[2J")
+#define entrerPourContinuer while(1){char msg_entree= __CHAR_NUL__; printf("Tapez entrée pour continuer\n"); scanf("%c",&msg_entree); if( msg_entree == '\n') {viderEcran; break;} }
+
 #define __SEPARATEUR_AVANT_DEBUT_NOUVEAU_CHAMP__  '#'
 #define __SEPARATEUR_APRES_DEBUT_NOUVEAU_CHAMP__  ':'
 #define __SEPARATEUR_SOUS_CHAMP__                 ','
